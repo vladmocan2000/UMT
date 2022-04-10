@@ -28,3 +28,7 @@ sumB/nB = sumC/nC => sumC = sumB*nC/nB
 We observe that a necessary condition is that (sumA*nB)%nA == 0 (3), because sumB is an integer.
 So, first of all we verify that exists a number nB (nB>1 and nB<nA because B and C could not be empty) that respects condition (3).
 If so, we continue by checking if we can compute the sum. For this, we compute all the combination of nB elements in a recursive manner and check if the (1) equation is satisfied.
+
+I also used a condition that help to ignore some unnecessary combinations: 
+	-nB<=nA/2, because one of the B and C lists will always have the number of elements less then or equal to nA/2
+	
