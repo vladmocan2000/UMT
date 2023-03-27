@@ -1,0 +1,35 @@
+Split array problem
+In a given integer array A, we must move every element of A to either list B or list C. (B and C
+initially start empty.)
+Return true if and only if after such a move, it is possible that the average value of B is equal to
+the average value of C, and B and C are both non-empty. 
+
+Solution:
+From the assumptions of the problem we have:
+
+sumA = the sum of all the given elements
+nA = the number of all the elements
+
+sumB = the sum of the elements of B
+nB = the number of the elements of B
+
+sumC = the sum of the elements of C 
+nC = the number of the elements of C
+
+nA = nB + nC
+sumA = sumB + sumC
+
+sumB/nB = sumC/nC => sumC = sumB*nC/nB 
+
+=> sumA = sumB + sumB*nC/nB => sumB = sumA*nB/(nB + nC) = sumA*nB/nA
+=> sumB = sumA*nB/nA (1) and sumC = sumA - sumB (2)
+=> it is sufficient to check if it is possible to compute sumB respecting the (1) equation because after that sumC is computed using (2) equation.
+
+We observe that a necessary condition is that (sumA*nB)%nA == 0 (3), because sumB is an integer.
+So, first of all we verify that exists a number nB (nB>1 and nB<nA because B and C could not be empty) that respects condition (3).
+If so, we continue by checking if we can compute the sum. For this, we compute all the combination of nB elements in a recursive manner and check if the (1) equation is satisfied.
+By sorting the array we can eliminate some redundant path in our recursion, when we have some consecutive equal values. This is easily seen from an example:
+	lets say we have 3 4(1) 4(2) 5 ...
+	the same subarray sum is computed: 3 + 4(1) + 5 + ... or 3 + 4(2) + 5 + ... 
+I also used a condition that help to ignore some unnecessary combinations: 
+	nB<=nA/2, because one of the B and C lists will always have the number of elements less then or equal to nA/2
